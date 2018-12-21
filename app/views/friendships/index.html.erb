@@ -1,0 +1,28 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Friendship</h1>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Request sent from</th>
+      <th>Request sent to</th>
+      <th>Status</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @friendships.each do |friendship| %>
+          <% user = User.find(friendship.user_id) %>
+          <% friend = User.find(friendship.friend_id) %>
+        <tr>
+        <td><%= user.name %></td>
+        <td><%= friend.name %></td>
+         <td><%= friendship.confirmed %></td>
+        <td> <%= link_to "Delete frindship", "/friendships/#{friendship.id}/destroy_friendship" , method: :delete, data: { confirm: 'Are you sure?' },   :class => "btn" %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>

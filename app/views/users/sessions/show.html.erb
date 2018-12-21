@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+<div class="container border border-dark shadow-lg p-4 mb-4 bg-white">
+<div class="well well-lg">
+<p>
+  <strong>Name:</strong>
+  <%= @user.name %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @user.email %>
+</p>
+<div class="btn-group btn-group-toggle">
+  <%if current_user.admin? or current_user == @user%>
+<%= link_to 'Edit', edit_user_path(@user) , :class => "btn" %>
+<%end%>
+<%= link_to 'Back', users_path , :class => "btn" %>
+ <%if !current_user.admin? %>
+<% if current_user.friend_requests.include? @user %>
+    <%= button_to "accept friendship      ", acc_friend_path , {:user=>@user.id}%><br>
+     <%= button_to "deniel", rev_friend_path , {:user=>@user.id}  %>
+<% elsif current_user.pending_friends.include? @user or current_user.friend?(@user) %>
+    <%= button_to "revoke friendship", rev_friend_path , {:user=>@user.id} %>
+<% else %>
+    <%= button_to "add friend", add_friend_path , {:user=>@user.id} %>
+<% end %>
+<% end %>
+<% if current_user == @user  %>
+ <%= link_to 'Destroy', user_registration_path, data: { confirm: 'Are you sure?' } ,:method => :delete , :class => "btn"%>
+<% end %>
+</div>
+</div>
+</div>

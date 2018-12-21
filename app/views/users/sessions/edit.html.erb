@@ -1,0 +1,10 @@
+<h1>Editing User</h1>
+<div class="container border border-dark shadow-lg p-4 mb-4 bg-white">
+<div class="well well-lg">
+<%= render 'form', user: @user %>
+<div class="btn-group btn-group-toggle">
+<%= link_to 'Show', @user , :class => "btn"%>
+<%= link_to 'Back', users_path, :class => "btn" %>
+</div>
+</div>
+</div>
